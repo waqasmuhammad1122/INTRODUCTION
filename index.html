@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waqas Computational Chemistry Lab</title>
     <style>
-        /* VHIO Inspired Color Palette */
+        /* Shared VHIO Inspired Color Palette & Global Styles */
         :root { 
             --vhio-navy: #006192; 
             --vhio-light-blue: #669AC5; 
@@ -13,30 +13,19 @@
             --bg-gray: #f9f9f9;
             --border-color: #e4e4e4;
         }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: var(--text-main); line-height: 1.6; }
         
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            color: var(--text-main); 
-            line-height: 1.6;
-        }
-        
-        /* Navigation Placeholder */
-        header { 
-            background: white; 
-            padding: 1rem 2rem; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--vhio-navy); }
+        /* Navigation */
+        header { background: white; padding: 1rem 2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--vhio-navy); display: flex; align-items: center; gap: 10px; }
+        .logo img { height: 40px; }
+        .top-nav a { color: var(--vhio-navy); text-decoration: none; margin-left: 20px; font-weight: bold; text-transform: uppercase; transition: color 0.3s; }
+        .top-nav a:hover, .top-nav a.active { color: var(--vhio-light-blue); }
 
         /* Hero Image Banner */
         .hero {
-            /* Replace the URL below with your actual lab banner image */
-            background-image: linear-gradient(rgba(0, 97, 146, 0.7), rgba(0, 97, 146, 0.7)), url('https://via.placeholder.com/1920x600');
+            /* Points to the group photo in your backend folder */
+            background-image: linear-gradient(rgba(0, 97, 146, 0.7), rgba(0, 97, 146, 0.7)), url('backend/group_photo.png');
             background-size: cover;
             background-position: center;
             padding: 100px 20px;
@@ -45,189 +34,100 @@
         }
         .hero h1 { font-size: 2.8rem; margin: 0; font-weight: 300; }
 
-        /* Main 2-Column Layout */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr; /* Left column wider than right */
-            gap: 50px;
-        }
-
-        /* Typography & Separators */
+        /* Main Layout */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 50px; }
         h2, h3 { color: var(--vhio-navy); margin-top: 0; }
-        .separator {
-            border-bottom: 2px solid var(--vhio-navy);
-            width: 100%;
-            margin: 20px 0;
-        }
+        .separator { border-bottom: 2px solid var(--vhio-navy); width: 100%; margin: 20px 0; }
 
-        /* Right Column: Group Leader Profile */
+        /* Right Column: Profile */
         .profile-card { text-align: center; }
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 15px;
-            border: 4px solid var(--bg-gray);
-        }
+        .profile-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 4px solid var(--bg-gray); }
         .profile-role { color: var(--text-main); font-weight: bold; text-transform: uppercase; margin: 5px 0;}
-        .profile-link { color: var(--vhio-light-blue); text-decoration: none; font-weight: bold; }
-        .profile-link:hover { text-decoration: underline; }
 
         /* Left Column: Accordions */
         .accordion { margin-top: 30px; }
-        .accordion-item {
-            border: 1px solid var(--vhio-navy);
-            margin-bottom: 10px;
-            border-radius: 3px;
-        }
-        .accordion-btn {
-            width: 100%;
-            text-align: left;
-            padding: 15px 20px;
-            background: white;
-            border: none;
-            color: var(--vhio-navy);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s;
-        }
+        .accordion-item { border: 1px solid var(--vhio-navy); margin-bottom: 10px; border-radius: 3px; }
+        .accordion-btn { width: 100%; text-align: left; padding: 15px 20px; background: white; border: none; color: var(--vhio-navy); font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.3s; }
         .accordion-btn:hover { background: var(--bg-gray); }
         .accordion-btn.active { border-bottom: 1px solid var(--vhio-navy); }
-        
-        .accordion-content {
-            padding: 0 20px;
-            background: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
-        .accordion-content.active {
-            padding: 20px;
-            max-height: 1000px; /* Arbitrary large number for CSS transition */
-        }
+        .accordion-content { padding: 0 20px; background: white; max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease; }
+        .accordion-content.active { padding: 20px; max-height: 1000px; }
+        ul { padding-left: 20px; } li { margin-bottom: 10px; }
 
-        ul, ol { padding-left: 20px; }
-        li { margin-bottom: 10px; }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; } /* Stacks into 1 column on mobile */
-            .profile-card { order: -1; margin-bottom: 30px; } /* Puts profile on top for mobile */
-        }
-        
         footer { background: var(--vhio-navy); color: white; text-align: center; padding: 20px; margin-top: 50px;}
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .profile-card { order: -1; margin-bottom: 30px; }
+            header { flex-direction: column; gap: 15px; }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Waqas Lab</div>
-    <div></div>
+    <div class="logo">
+        <img src="backend/logo.png" alt="Lab Logo">
+        Waqas Lab
+    </div>
+    <nav class="top-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="team.html">Team</a>
+        <a href="publications.html">Publications</a>
+    </nav>
 </header>
 
 <section class="hero">
-    <h1>Waqas Computational Chemistry Lab</h1>
+    <h1>Computational Immunogenomics & Chemistry</h1>
 </section>
 
 <div class="container">
     <div class="main-content">
-        <h2>Introduction</h2>
-        <p>Located at the University of Campania, Italy, our group specializes in the intersection of Bioinformatics, Machine Learning, and Computational Medicinal Chemistry. We are dedicated to developing novel ML algorithms for GPCR engineering to enhance thermostability and pioneering new antitrypanosomal agents.</p>
-        <p>By integrating molecular dynamics simulations, CADD, and dry-lab transcriptomics, our final goal is to leverage computational models to improve the clinical development of tailored therapeutics.</p>
+        <h2>About Our Research</h2>
+        <p>Located at the University of Campania, Italy, our group specializes in the intersection of Bioinformatics, Machine Learning, and Computational Medicinal Chemistry. We integrate molecular dynamics simulations, CADD, and dry-lab transcriptomics to improve the clinical development of tailored therapeutics.</p>
 
-        <div style="background: var(--bg-gray); border: 2px dashed var(--border-color); padding: 40px; text-align: center; color: #888; margin: 30px 0;">
-            📸 <em>YouTube Video or Lab Graphic Placeholder</em>
+        <div style="margin: 30px 0; text-align: center;">
+            <img src="backend/research_graphic.png" alt="Research Methodology" style="max-width: 100%; border: 1px solid var(--border-color); border-radius: 4px;">
+            <p style="font-size: 0.9rem; color: #666; font-style: italic;">Figure 1: Outline of our computational pipeline.</p>
         </div>
 
         <div class="accordion">
-            
             <div class="accordion-item">
                 <button class="accordion-btn" onclick="toggleAccordion(this)">
-                    <span>Research Lines</span>
-                    <span class="icon">+</span>
+                    <span>Core Research Lines</span><span class="icon">+</span>
                 </button>
                 <div class="accordion-content">
                     <ul>
                         <li>Developing Machine Learning algorithms for GPCR engineering to enhance thermostability.</li>
                         <li>Identification of constrained peptidomimetics as antitrypanosomal agents.</li>
                         <li>Molecular Dynamics Simulations and Computer-Aided Drug Design (CADD).</li>
-                        <li>Next-Generation Sequencing (NGS) data analysis.</li>
                     </ul>
                 </div>
             </div>
-
-            <div class="accordion-item">
-                <button class="accordion-btn" onclick="toggleAccordion(this)">
-                    <span>Selected Publications</span>
-                    <span class="icon">+</span>
-                </button>
-                <div class="accordion-content">
-                    <ol>
-                        <li><strong>Identification of constrained peptidomimetics carrying a Michael acceptor warhead as antitrypanosomal agents.</strong> <em>European Journal of Medicinal Chemistry</em> (2025).</li>
-                        <li><strong>Discovery of the First-in-Class Dual TSPO/Carbonic Anhydrase Modulators...</strong> <em>ACS Chemical Neuroscience</em> (2024).</li>
-                        <li><strong>Immunoinformatics and Molecular Docking Studies Predicted Potential Multiepitope-Based Peptide Vaccine... against SARS-CoV-2.</strong> <em>BioMed Research International</em> (2021).</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <button class="accordion-btn" onclick="toggleAccordion(this)">
-                    <span>Team & Open Positions</span>
-                    <span class="icon">+</span>
-                </button>
-                <div class="accordion-content">
-                    <p><strong>Principal Investigator:</strong> Dr. Muhammad Waqas</p>
-                    <p><strong>Open Positions:</strong> We are currently seeking a highly motivated PhD candidate to work on Machine Learning applications for GPCR thermostability. Experience in Python, R, and Molecular Dynamics is required.</p>
-                </div>
-            </div>
-
         </div>
     </div>
 
     <div class="sidebar">
         <div class="separator"></div>
         <div class="profile-card">
-            <img src="https://via.placeholder.com/300" alt="Dr. Muhammad Waqas" class="profile-img">
+            <img src="backend/profile_picture.png" alt="Dr. Muhammad Waqas" class="profile-img" onerror="this.src='https://via.placeholder.com/200'">
             <h3 style="margin-bottom: 0;">Dr. Muhammad Waqas</h3>
-            <p class="profile-role">Group Leader</p>
-            <a href="#" class="profile-link">Biosketch</a>
+            <p class="profile-role">Principal Investigator</p>
         </div>
         <div class="separator"></div>
     </div>
 </div>
 
-<footer>
-    &copy; 2026 Waqas Lab | Computational Medicinal Chemistry
-</footer>
+<footer>&copy; 2026 Waqas Lab | Computational Medicinal Chemistry</footer>
 
 <script>
     function toggleAccordion(button) {
-        // Toggle the active class on the button
         button.classList.toggle("active");
-        
-        // Find the content panel right next to the button
         var content = button.nextElementSibling;
-        
-        // Toggle the active class on the content
         content.classList.toggle("active");
-        
-        // Change the + and - icon
         var icon = button.querySelector('.icon');
-        if (content.classList.contains("active")) {
-            icon.textContent = "-";
-        } else {
-            icon.textContent = "+";
-        }
+        icon.textContent = content.classList.contains("active") ? "-" : "+";
     }
 </script>
-
 </body>
 </html>
