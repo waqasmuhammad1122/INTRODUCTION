@@ -5,146 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waqas Computational Chemistry Lab</title>
     <style>
-        :root { --primary: #1a365d; --secondary: #3182ce; --light: #f7fafc; --text: #2d3748; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; color: var(--text); background-color: var(--light); }
+        /* VHIO Inspired Color Palette */
+        :root { 
+            --vhio-navy: #006192; 
+            --vhio-light-blue: #669AC5; 
+            --text-main: #333333;
+            --bg-gray: #f9f9f9;
+            --border-color: #e4e4e4;
+        }
         
-        /* Header & Navigation */
-        header { background: var(--primary); color: white; padding: 1rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .nav-container { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-size: 1.5rem; font-weight: bold; }
-        nav { display: flex; gap: 1rem; }
-        .tab-btn { background: none; border: none; color: white; font-size: 1rem; cursor: pointer; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.3s; }
-        .tab-btn:hover, .tab-btn.active { background: var(--secondary); }
-
-        /* Main Content Area */
-        main { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; min-height: 60vh; }
-        .tab-content { display: none; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); animation: fadeIn 0.4s; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        h1, h2 { color: var(--primary); border-bottom: 2px solid var(--light); padding-bottom: 0.5rem; }
-
-        /* Graphics & Image Grids */
-        .image-placeholder { background: #e2e8f0; border: 2px dashed #a0aec0; text-align: center; padding: 2rem; border-radius: 8px; color: #718096; margin-bottom: 1rem; }
-        .image-placeholder img { max-width: 100%; border-radius: 4px; display: none; /* remove display:none when you add a real image */ }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: var(--text-main); 
+            line-height: 1.6;
+        }
         
-        .staff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-        .staff-card { border: 1px solid #e2e8f0; padding: 1rem; text-align: center; border-radius: 8px; }
-        .staff-photo { width: 120px; height: 120px; background: #cbd5e0; border-radius: 50%; margin: 0 auto 1rem; object-fit: cover; }
+        /* Navigation Placeholder */
+        header { 
+            background: white; 
+            padding: 1rem 2rem; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--vhio-navy); }
 
-        /* Contact Form */
-        form { display: flex; flex-direction: column; gap: 1rem; }
-        input, textarea { padding: 0.8rem; border: 1px solid #cbd5e0; border-radius: 4px; font-family: inherit; }
-        button[type="submit"] { background: var(--secondary); color: white; border: none; padding: 1rem; cursor: pointer; border-radius: 4px; font-weight: bold; }
-        button[type="submit"]:hover { background: var(--primary); }
+        /* Hero Image Banner */
+        .hero {
+            /* Replace the URL below with your actual lab banner image */
+            background-image: linear-gradient(rgba(0, 97, 146, 0.7), rgba(0, 97, 146, 0.7)), url('https://via.placeholder.com/1920x600');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px;
+            text-align: center;
+            color: white;
+        }
+        .hero h1 { font-size: 2.8rem; margin: 0; font-weight: 300; }
 
-        footer { text-align: center; padding: 2rem; background: var(--primary); color: white; margin-top: 2rem; }
+        /* Main 2-Column Layout */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr; /* Left column wider than right */
+            gap: 50px;
+        }
+
+        /* Typography & Separators */
+        h2, h3 { color: var(--vhio-navy); margin-top: 0; }
+        .separator {
+            border-bottom: 2px solid var(--vhio-navy);
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        /* Right Column: Group Leader Profile */
+        .profile-card { text-align: center; }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 4px solid var(--bg-gray);
+        }
+        .profile-role { color: var(--text-main); font-weight: bold; text-transform: uppercase; margin: 5px 0;}
+        .profile-link { color: var(--vhio-light-blue); text-decoration: none; font-weight: bold; }
+        .profile-link:hover { text-decoration: underline; }
+
+        /* Left Column: Accordions */
+        .accordion { margin-top: 30px; }
+        .accordion-item {
+            border: 1px solid var(--vhio-navy);
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+        .accordion-btn {
+            width: 100%;
+            text-align: left;
+            padding: 15px 20px;
+            background: white;
+            border: none;
+            color: var(--vhio-navy);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .accordion-btn:hover { background: var(--bg-gray); }
+        .accordion-btn.active { border-bottom: 1px solid var(--vhio-navy); }
+        
+        .accordion-content {
+            padding: 0 20px;
+            background: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        .accordion-content.active {
+            padding: 20px;
+            max-height: 1000px; /* Arbitrary large number for CSS transition */
+        }
+
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; } /* Stacks into 1 column on mobile */
+            .profile-card { order: -1; margin-bottom: 30px; } /* Puts profile on top for mobile */
+        }
+        
+        footer { background: var(--vhio-navy); color: white; text-align: center; padding: 20px; margin-top: 50px;}
     </style>
 </head>
 <body>
 
 <header>
-    <div class="nav-container">
-        <div class="logo">Waqas Lab</div>
-        <nav>
-            <button class="tab-btn active" onclick="openTab(event, 'home')">Home</button>
-            <button class="tab-btn" onclick="openTab(event, 'staff')">Our Staff</button>
-            <button class="tab-btn" onclick="openTab(event, 'publications')">Publications</button>
-            <button class="tab-btn" onclick="openTab(event, 'positions')">Open Positions</button>
-            <button class="tab-btn" onclick="openTab(event, 'contact')">Contact Us</button>
-        </nav>
-    </div>
+    <div class="logo">Waqas Lab</div>
+    <div></div>
 </header>
 
-<main>
-    <div id="home" class="tab-content active">
-        <h1>Welcome to the Waqas Computational Chemistry Lab</h1>
-        <div class="image-placeholder">
-            <p>📸 Add a lab group photo or a cool 3D protein structure graphic here.</p>
-            </div>
-        <p>Located at the University of Campania, our laboratory specializes in the intersection of Bioinformatics, Machine Learning, and Computational Medicinal Chemistry. We are dedicated to developing novel ML algorithms for GPCR engineering and pioneering new antitrypanosomal agents.</p>
-    </div>
+<section class="hero">
+    <h1>Waqas Computational Chemistry Lab</h1>
+</section>
 
-    <div id="staff" class="tab-content">
-        <h2>Our Team</h2>
-        <p>Meet the brilliant minds driving our research forward.</p>
-        <div class="staff-grid">
-            <div class="staff-card">
-                <img src="https://via.placeholder.com/150" alt="Muhammad Waqas" class="staff-photo">
-                <h3>Dr. Muhammad Waqas</h3>
-                <p>Principal Investigator</p>
-                <small>Specializes in ML & CADD</small>
+<div class="container">
+    <div class="main-content">
+        <h2>Introduction</h2>
+        <p>Located at the University of Campania, Italy, our group specializes in the intersection of Bioinformatics, Machine Learning, and Computational Medicinal Chemistry. We are dedicated to developing novel ML algorithms for GPCR engineering to enhance thermostability and pioneering new antitrypanosomal agents.</p>
+        <p>By integrating molecular dynamics simulations, CADD, and dry-lab transcriptomics, our final goal is to leverage computational models to improve the clinical development of tailored therapeutics.</p>
+
+        <div style="background: var(--bg-gray); border: 2px dashed var(--border-color); padding: 40px; text-align: center; color: #888; margin: 30px 0;">
+            📸 <em>YouTube Video or Lab Graphic Placeholder</em>
+        </div>
+
+        <div class="accordion">
+            
+            <div class="accordion-item">
+                <button class="accordion-btn" onclick="toggleAccordion(this)">
+                    <span>Research Lines</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <ul>
+                        <li>Developing Machine Learning algorithms for GPCR engineering to enhance thermostability.</li>
+                        <li>Identification of constrained peptidomimetics as antitrypanosomal agents.</li>
+                        <li>Molecular Dynamics Simulations and Computer-Aided Drug Design (CADD).</li>
+                        <li>Next-Generation Sequencing (NGS) data analysis.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="staff-card">
-                <img src="https://via.placeholder.com/150" alt="Staff Member" class="staff-photo">
-                <h3>Jane Doe</h3>
-                <p>Postdoctoral Researcher</p>
-                <small>Specializes in Molecular Dynamics</small>
+
+            <div class="accordion-item">
+                <button class="accordion-btn" onclick="toggleAccordion(this)">
+                    <span>Selected Publications</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <ol>
+                        <li><strong>Identification of constrained peptidomimetics carrying a Michael acceptor warhead as antitrypanosomal agents.</strong> <em>European Journal of Medicinal Chemistry</em> (2025).</li>
+                        <li><strong>Discovery of the First-in-Class Dual TSPO/Carbonic Anhydrase Modulators...</strong> <em>ACS Chemical Neuroscience</em> (2024).</li>
+                        <li><strong>Immunoinformatics and Molecular Docking Studies Predicted Potential Multiepitope-Based Peptide Vaccine... against SARS-CoV-2.</strong> <em>BioMed Research International</em> (2021).</li>
+                    </ol>
+                </div>
             </div>
+
+            <div class="accordion-item">
+                <button class="accordion-btn" onclick="toggleAccordion(this)">
+                    <span>Team & Open Positions</span>
+                    <span class="icon">+</span>
+                </button>
+                <div class="accordion-content">
+                    <p><strong>Principal Investigator:</strong> Dr. Muhammad Waqas</p>
+                    <p><strong>Open Positions:</strong> We are currently seeking a highly motivated PhD candidate to work on Machine Learning applications for GPCR thermostability. Experience in Python, R, and Molecular Dynamics is required.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div id="publications" class="tab-content">
-        <h2>Recent Publications</h2>
-        <ul>
-            <li style="margin-bottom: 1rem;">
-                <strong>Identification of constrained peptidomimetics carrying a Michael acceptor warhead as antitrypanosomal agents.</strong><br>
-                <em>European Journal of Medicinal Chemistry</em> (2025)
-            </li>
-            <li style="margin-bottom: 1rem;">
-                <strong>Discovery of the First-in-Class Dual TSPO/Carbonic Anhydrase Modulators...</strong><br>
-                <em>ACS Chemical Neuroscience</em> (2024)
-            </li>
-        </ul>
-    </div>
-
-    <div id="positions" class="tab-content">
-        <h2>Open Positions</h2>
-        <div style="background: var(--light); padding: 1rem; border-left: 4px solid var(--secondary); margin-bottom: 1rem;">
-            <h3>🔬 PhD Student - Computational Chemistry</h3>
-            <p>We are seeking a highly motivated PhD candidate to work on Machine Learning applications for GPCR thermostability.</p>
-            <p><strong>Requirements:</strong> Experience in Python, R, and Molecular Dynamics.</p>
-            <p><em>To apply, please use the Contact Us form and include a link to your CV.</em></p>
+    <div class="sidebar">
+        <div class="separator"></div>
+        <div class="profile-card">
+            <img src="https://via.placeholder.com/300" alt="Dr. Muhammad Waqas" class="profile-img">
+            <h3 style="margin-bottom: 0;">Dr. Muhammad Waqas</h3>
+            <p class="profile-role">Group Leader</p>
+            <a href="#" class="profile-link">Biosketch</a>
         </div>
+        <div class="separator"></div>
     </div>
-
-    <div id="contact" class="tab-content">
-        <h2>Contact Us</h2>
-        <p>Interested in collaborating or joining the lab? Reach out below.</p>
-        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </div>
-</main>
+</div>
 
 <footer>
-    &copy; 2026 Waqas Lab | University of Campania
+    &copy; 2026 Waqas Lab | Computational Medicinal Chemistry
 </footer>
 
 <script>
-    // This JavaScript handles the dynamic tab switching
-    function openTab(evt, tabName) {
-        // Hide all tab content
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-            tabcontent[i].classList.remove("active");
-        }
+    function toggleAccordion(button) {
+        // Toggle the active class on the button
+        button.classList.toggle("active");
         
-        // Remove "active" class from all buttons
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].classList.remove("active");
-        }
+        // Find the content panel right next to the button
+        var content = button.nextElementSibling;
         
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(tabName).style.display = "block";
-        document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.classList.add("active");
+        // Toggle the active class on the content
+        content.classList.toggle("active");
+        
+        // Change the + and - icon
+        var icon = button.querySelector('.icon');
+        if (content.classList.contains("active")) {
+            icon.textContent = "-";
+        } else {
+            icon.textContent = "+";
+        }
     }
 </script>
 
